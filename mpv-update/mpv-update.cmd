@@ -54,6 +54,10 @@ echo Download or extract error, check your network and try again later.
 goto :End
 
 :End
+if exist youtube-dl.exe (
+    echo Found youtube-dl, checking for updates...
+    youtube-dl.exe --update
+)
 pause
 exit /B
 
