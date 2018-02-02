@@ -26,12 +26,10 @@ if "%currentVersion%" == "%newVersion%" (
 )
 
 echo Downloading mpv %newVersion%...
-2>&1 1>nul mkdir "mpv-%newVersion%"
+mkdir "mpv-%newVersion%" 2>&1 1>nul
 cd "mpv-%newVersion%"
-goto :Debug
 call :Download "https://ci.appveyor.com/api/projects/myfreeer/mpv-build-lite/artifacts/mpv.7z?branch=master" "mpv-%newVersion%.7z"
 echo Extracting mpv %newVersion%...
-:Debug
 2>&1 1>nul copy /y /b "%bin%\7zsd_LZMA2_x64.sfx" +"mpv-%newVersion%.7z" "mpv-%newVersion%.exe"
 2>&1 1>nul start /wait "" "mpv-%newVersion%.exe"
 if %ERRORLEVEL% neq 0 goto :Error
