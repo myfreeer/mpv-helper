@@ -21,6 +21,5 @@ exit /b
 :CreateShort
 set "vbs=set a=CreateObject(""WScript.Shell"") :set b=a.CreateShortcut(""%~1"")"
 set "vbs=%vbs%  :b.TargetPath=""%~2""  :b.Arguments=""%~3""  :b.Save:close"
-echo %vbs%
 start /wait /min mshta VBScript:Execute("%vbs%")
 exit /b
