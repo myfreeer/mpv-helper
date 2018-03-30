@@ -30,8 +30,7 @@ mkdir "mpv-%newVersion%" 2>&1 1>nul
 cd "mpv-%newVersion%"
 call :Download "https://ci.appveyor.com/api/projects/myfreeer/mpv-build-lite/artifacts/mpv.7z?branch=master" "mpv-%newVersion%.7z"
 echo Extracting mpv %newVersion%...
-2>&1 1>nul copy /y /b "%bin%\7zsd_LZMA2_x64.sfx" +"mpv-%newVersion%.7z" "mpv-%newVersion%.exe"
-2>&1 1>nul start /wait "" "mpv-%newVersion%.exe"
+..\7zDec x "mpv-%newVersion%.7z"
 if %ERRORLEVEL% neq 0 goto :Error
 for /d %%i in ("mpv-*") do (
     cd "%%~i" && goto :Update

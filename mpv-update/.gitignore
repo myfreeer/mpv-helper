@@ -1,7 +1,23 @@
+# execuables
 *.exe
 *.com
+
+# docs
 *.pdf
+
+# configs
 *.conf
+
+# packages
+*.7z
+
+# user scripts
 *.js
 *.lua
-*.7z
+
+# user shaders
+*.glsl
+*.hook
+
+# 7z decompressor
+!7z*.exe
