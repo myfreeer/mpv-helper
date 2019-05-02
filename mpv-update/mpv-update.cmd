@@ -30,11 +30,10 @@ mkdir "mpv-%newVersion%" 2>&1 1>nul
 cd "mpv-%newVersion%"
 call :Download "https://ci.appveyor.com/api/projects/myfreeer/mpv-build-lite/artifacts/mpv.7z?branch=master" "mpv-%newVersion%.7z"
 echo Extracting mpv %newVersion%...
-..\7zDec x "mpv-%newVersion%.7z"
+mkdir "mpv-%newVersion%"
+cd "mpv-%newVersion%"
+..\..\7zDec x "..\mpv-%newVersion%.7z"
 if %ERRORLEVEL% neq 0 goto :Error
-for /d %%i in ("mpv-*") do (
-    cd "%%~i" && goto :Update
-)
 
 :Update
 mpv -V | find /I "%newVersion%" 2>&1 1>nul
