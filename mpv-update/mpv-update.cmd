@@ -27,11 +27,11 @@ if "%currentVersion%" == "%newVersion%" (
 
 echo Downloading mpv %newVersion%...
 mkdir "mpv-%newVersion%" 2>&1 1>nul
-cd "mpv-%newVersion%"
+cd "mpv-%newVersion%" || goto :Error
 call :Download "https://ci.appveyor.com/api/projects/myfreeer/mpv-build-lite/artifacts/mpv.7z?branch=master" "mpv-%newVersion%.7z"
 echo Extracting mpv %newVersion%...
 mkdir "mpv-%newVersion%"
-cd "mpv-%newVersion%"
+cd "mpv-%newVersion%" || goto :Error
 ..\..\7zDec x "..\mpv-%newVersion%.7z"
 if %ERRORLEVEL% neq 0 goto :Error
 
@@ -40,7 +40,7 @@ mpv -V | find /I "%newVersion%" 2>&1 1>nul
 if %ERRORLEVEL% neq 0 goto :Error
 echo Updating mpv files to %newVersion%...
 2>&1 1>nul xcopy /S /G /H /R /Y /D ".\*" ..\..\
-cd ..\..
+cd ..\.. || goto :Error
 rd /s /q "mpv-%newVersion%" || rd /s /q "mpv-%newVersion%" 2>&1 1>nul 
 echo Updated mpv to version %newVersion%
 goto :End
